@@ -1,0 +1,88 @@
+#lines starting with '#" are not processed,  only work as comments
+
+#baseline fire name: all the other files are generated from this BaseFile with considerations of input variables' changes shown below
+
+BaseFile=./base/PF_base_wowb.fds
+
+#input variables: VarType,Alias, FDS_VarName,LowerLimit, UpperLimit,BaseValue,Divisions
+#   VarType[0] = 'I' or 'O',  'I' means input variable, 'O' means output variables. in this file only 'I' is addressed
+#   VarType[1] = 'S' or 'R' or '_',  'S' means the thereby generated files is going to be used in sensitivity  Matrix Method (SMM);
+#     'R' means the thereby generated files is going to be used in response surface model (RSM) or substitue model
+#     '_' is reserved for future use or no special meanings
+#   VarType[2] = 'G' or 'P' or 'C',  'G' means the variables to be changed are geograpic variables including 6 coordinates, every time only one
+#           coordinate is allowed to change
+#     'p' means the variables to be changed are  physical variables, usually with the type of double
+#     'C' means the variables to be changed are combined variables of type 'P' or/and type 'G', only one file will be
+#     generated including all the changes indicated by each entries with the same VarType . the combined changes case is
+#     used to check the accuracy of the SMM or RSM
+#   Alias: another name of FDS_Varname which is more informative;
+#   FDS_VarName: the variables name in FDS;
+#   LowerLimit: the minimum value that a variable can be set;
+#   UpperLimit: the maximum value that a variable can be set;
+#   BaseValue:  the value of a variable from baseline FDS file;
+#   Divisions : for VarType[1] = 'R', namely the RSM model, the value of Divisions is used to decide how many files should be produced between 
+#     LowerLimit and UpperLimit; for VarType[1] = 'S', it doesn't matter since only 2 files will be produced which are LowerLimit and UpperLimit;
+#     for VarTypep[2] = 'C', Division = 1 means UpperLimit will be adopted, Division = -1 means LowerLimit will be adopted to fabricate the combined 
+#     variation.
+      
+
+
+VarType=IRG, Alias=CDW, FDS_ID=CorridorDoor,FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.575|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.875|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=5
+VarType=IRP, Alias=HRR, FDS_ID=burner,FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=1500,0, UpperLimit=4500.0, Divisions=5
+VarType=IRP, Alias=SY, FDS_ID=POLYURETHANE+Wood(oak),FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.02, UpperLimit=0.09, Divisions=5
+VarType=IRP, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.1, UpperLimit=0.5, Divisions=5
+
+#For sensitivity analysis, no division, only the lower and upper limit are used
+
+VarType=ISG, Alias=CDW, FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.325|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-44.175|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=0
+VarType=ISP, Alias=HRR, FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=2700.0, UpperLimit=3300.0, Divisions=0
+VarType=ISP, Alias=SY, FDS_ID=POLYURETHANE+Wood(oak), FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.0468, UpperLimit=0.0572, Divisions=0
+VarType=ISP, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.225, UpperLimit=0.275, Divisions=0
+
+VarType=I_C, Alias=CDW, FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.575|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.875|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=1
+VarType=I_C, Alias=SY,FDS_ID=POLYURETHANE+Wood(oak), FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.03, UpperLimit=0.07, Divisions=-1
+VarType=I_C, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.15, UpperLimit=0.35, Divisions=1
+VarType=I_C, Alias=HRR, FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=2200,0, UpperLimit=4400.0, Divisions=-1
+
+VarType=I1C, Alias=CDW, FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.5|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.8|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=-1
+VarType=I1C, Alias=SY,FDS_ID=POLYURETHANE+Wood(oak), FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.02, UpperLimit=0.08, Divisions=1
+VarType=I1C, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.10, UpperLimit=0.4, Divisions=-1
+VarType=I1C, Alias=HRR, FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=1800,0, UpperLimit=3800.0, Divisions=1
+
+VarType=I2C, Alias=CDW,FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.5|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.8|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=1
+VarType=I2C, Alias=SY, FDS_ID=POLYURETHANE+Wood(oak),FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.02, UpperLimit=0.08, Divisions=1
+VarType=I2C, Alias=EX, FDS_ID=exhaust,FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.10, UpperLimit=0.4, Divisions=1
+VarType=I2C, Alias=HRR,FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=1800,0, UpperLimit=3800.0, Divisions=1
+
+VarType=I3C, Alias=CDW,FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.6|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.7|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=1
+VarType=I3C, Alias=SY, FDS_ID=POLYURETHANE+Wood(oak), FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.04, UpperLimit=0.07, Divisions=1
+VarType=I3C, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.2, UpperLimit=0.3, Divisions=1
+VarType=I3C, Alias=HRR,FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=2500,0, UpperLimit=3500.0, Divisions=1
+
+VarType=I4C, Alias=CDW,FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.6|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.7|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=-1
+VarType=I4C, Alias=SY, FDS_ID=POLYURETHANE+Wood(oak), FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.04, UpperLimit=0.07, Divisions=-1
+VarType=I4C, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.2, UpperLimit=0.3, Divisions=-1
+VarType=I4C, Alias=HRR,FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=2500,0, UpperLimit=3500.0, Divisions=-1
+
+VarType=I5C, Alias=CDW,FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.6|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.7|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=-1
+VarType=I5C, Alias=SY, FDS_ID=POLYURETHANE+Wood(oak),FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.028, UpperLimit=0.07, Divisions=-1
+VarType=I5C, Alias=EX, FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.2, UpperLimit=0.3, Divisions=-1
+VarType=I5C, Alias=HRR, FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=2500,0, UpperLimit=3500.0, Divisions=1
+
+VarType=I6C, Alias=CDW,FDS_ID=CorridorDoor, FDS_VarName=XB, BaseValue=-44.25|-43.5|-39.7|-39.475|-0.025|2.5, LowerLimit=-44.6|-43.5|-39.7|-39.475|-0.025|2.5,  UpperLimit=-43.7|-43.5|-39.7|-39.475|-0.025|2.5,Divisions=1
+VarType=I6C, Alias=SY,FDS_ID=POLYURETHANE+Wood(oak), FDS_VarName=SOOT_YIELD, BaseValue=0.052, LowerLimit=0.028, UpperLimit=0.07, Divisions=1
+VarType=I6C, Alias=EX,FDS_ID=exhaust, FDS_VarName=VOLUME_FLOW, BaseValue=0.25, LowerLimit=0.2, UpperLimit=0.3, Divisions=1
+VarType=I6C, Alias=HRR, FDS_ID=burner, FDS_VarName=HRRPUA, BaseValue=3000.0, LowerLimit=2500,0, UpperLimit=3500.0, Divisions=-1
+
+#output variables: VarType, Alias, FDS_VarName, CriticalValue, Division
+#    the sensitivity matrix shows how the output changes with input variables
+#  VarType[2]: 't' = time variables, 'R' = radiation variables
+#  Alias is another name or explanation of TargetName which in turn is the target variables we want to monitor
+#  CriticalValue is about FDS_VarName;  the whole record can be explained as " (what is) the value of "TargetName" when the value of "FDS_VarName" 
+#                       meets the "CriticalValue"
+#  Division: -1 = CriticalValue is met from top to bottom; 1 = CriticalValue is met from bottom to top
+
+VarType=O_t, Alias=ASET_5, TargetName=Time,FDS_ID=V1, FDS_VarName=V1, CriticalValue=5.00,Division=-1
+VarType=O_t, Alias=ASET_10, TargetName=Time,FDS_ID=V1, FDS_VarName=V1,CriticalValue=10.00,Division=-1
+#VarType=O_R, Alias=RAD_10, TargetName=Rad02,FDS_VarName=V1, CriticalValue=10.00,Division=-1
+#VarType=O_t, Alias=RHF_5, TargetName=Time,FDS_VarName=Rad02, CriticalValue=5.00,Division=1
