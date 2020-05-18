@@ -1,0 +1,12 @@
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_HRR_3300.000000_0.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_SY_0.057200_0.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_SY_0.057200.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_HRR_3300.000000.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_EX_0.275000.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_EX_0.225000_0.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_EX_0.225000.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_SY_0.046800_0.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_HRR_2700.000000_0.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_HRR_2700.000000.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_EX_0.275000_0.fds
+sfds -n 2 -T 2 -t 40:40 -p long -i /work/hwang8/FPM_2/ISP/P_SY_0.046800.fds
